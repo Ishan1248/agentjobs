@@ -1,0 +1,11 @@
+const path = require("path");
+const express = require("express");
+const router = express.Router();
+const userAuthController = require(path.join(__dirname, "..", "..", "controller", "userAuthController"));
+const jobPostController=require(path.join(__dirname,"..","..","controller","Jobpost","jobPostController"));
+router.use(userAuthController.protect);
+router.get("/getAllJobPost",jobPostController.getAllJobPost);
+router.post("/addJobPost",jobPostController.addJobPost);
+router.patch("/UpdateJobPost",jobPostController.UpdateJobPost);
+router.delete("/deleteJobPost",jobPostController.deleteJobPost);
+module.exports=router;
