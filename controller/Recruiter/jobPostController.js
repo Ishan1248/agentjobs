@@ -71,3 +71,33 @@ exports.getJobPostedToRecruiter = catchAsync(async (req, res, next) => {
   } 
 });
 
+// update product
+exports.updateJobPost = catchAsyncErrors(async (req, res) => {
+  let updateJob = jobPostSchema.findById(req.param.id);
+  if (!updateJob) {
+    return next(new ErrorHandler("Jobpost not found"), 404);
+  }
+  updateJob = await jobPostSchema.findByIdAndUpdate(req.params.id, req.body, {
+    renValidators: true,
+    useFindAndModify: false,
+  });
+
+  res.status(200).json({
+    success: true,
+    updateJob,
+  });
+});
+
+// Delete product
+exports.deleteJobPost = catchAsyncErrors(async (req, res, next) => {
+  const delJobPost = await jobPostSchema.findById(req.params.id);
+  if (!delJobPost) {
+    return next(new ErrorHandler("Job Post not found"), 404);
+  }
+  await delJobPost.remove();
+
+  res.status(200).json({
+    success: true,
+    message: "Job post deleted",
+  });
+});

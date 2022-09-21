@@ -14,7 +14,7 @@ const RecruiterSchema = new Schema({
     select: false,
   },
   isAllDocumentsVerified: Boolean,
-  profilePhoto: String,
+  profilePictureLink: String,
   accountFreezeDate: Date,
   role: {
     type: String,
@@ -56,8 +56,18 @@ const RecruiterSchema = new Schema({
     state: String,
     city: String,
     companyName: String,
+    companyNumber: String,
+    companyLinks: [
+      {
+        domainName: String,
+        domainUrl: String,
+      },
+    ],
     companyType: String,
     companyAddress: String,
+    companyStrength: Number,
+    companyAbout: String,
+    companyLogo: String,
   },
   documents: {
     taxIdNumber: {
@@ -75,6 +85,14 @@ const RecruiterSchema = new Schema({
     },
   ],
 });
+
+RecruiterSchema.methods.changePasswordAfter = function (JWTTimestamp) {
+  if (this.passwordChangedAt) {
+    const changedTimeStamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
+    return JWTTimestamp < changedTimeStamp;
+  }
+  return false; // false means password not change & no-error
+};
 
 const Recruiter = mongoose.model("Recruiter", RecruiterSchema);
 module.exports = Recruiter;
