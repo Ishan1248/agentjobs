@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const path = require("path");
-const candidateSchemaHelpers = require(path.join(__dirname, "..", "helpers", "candidateSchemaHelpers"));
+const moment = require("moment");
+const candidateSchemaHelpers = require(path.join(__dirname, "..", "helpers", "candidate", "candidateSchemaHelpers"));
 const Schema = mongoose.Schema;
 const CandidateSchema = new Schema({
   firstName: {
@@ -24,7 +25,7 @@ const CandidateSchema = new Schema({
     select: false,
   },
   isAllDocumentsVerified: Boolean,
-  profilePhoto: String,
+  profilePictureLink: String,
   role: {
     type: String,
     enum: ["recruiter", "candidate", "agent"],
@@ -70,17 +71,35 @@ const CandidateSchema = new Schema({
   },
   appliedJobs: [
     {
-      type: mongoose.Schema.ObjectId,
-      ref: "JobPost",
+      job: {
+        type: mongoose.Schema.ObjectId,
+        ref: "JobPost",
+      },
+      candidateJobStatus: {
+        type: String,
+        default: "applied",
+        enum: ["applied", "rejected", "shortlisted", "selected"],
+      },
+      candidateJobDate: {
+        type: Date,
+        default: moment(new Date(Date.now())).format("YYYY-MM-DD"),
+      },
     },
   ],
-  selectedJobs: [
+  bookMarkedJobs: [
     {
       type: mongoose.Schema.ObjectId,
       ref: "JobPost",
     },
   ],
 });
+CandidateSchema.methods.changePasswordAfter = function (JWTTimestamp) {
+  if (this.passwordChangedAt) {
+    const changedTimeStamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
+    return JWTTimestamp < changedTimeStamp;
+  }
+  return false; // false means password not change & no-error
+};
 
 const Candidate = mongoose.model("Candidate", CandidateSchema);
 module.exports = Candidate;

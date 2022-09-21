@@ -20,7 +20,7 @@ const AgentSchema = new Schema({
     select: false,
   },
   isAllDocumentsVerified: Boolean,
-  profilePhoto: String,
+  profilePictureLink: String,
   accountFreezeDate: Date,
   role: {
     type: String,
@@ -57,8 +57,7 @@ const AgentSchema = new Schema({
     passwordToken: String,
     passwordTokenExpiry: Date,
   },
-  companyInformation: 
-    {
+  companyInformation: {
     country: String,
     state: String,
     city: String,
@@ -95,6 +94,14 @@ const AgentSchema = new Schema({
     },
   ],
 });
+
+AgentSchema.methods.changePasswordAfter = function (JWTTimestamp) {
+  if (this.passwordChangedAt) {
+    const changedTimeStamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
+    return JWTTimestamp < changedTimeStamp;
+  }
+  return false; // false means password not change & no-error
+};
 
 const Agent = mongoose.model("Agent", AgentSchema);
 module.exports = Agent;

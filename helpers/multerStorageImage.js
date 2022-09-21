@@ -20,4 +20,4 @@ const imagFileFilter = function (req, file, cb) {
 const upload = multer({ storage: imageStorage, fileFilter: imagFileFilter });
 module.exports = upload;
 
-// DOCUMENTS
+

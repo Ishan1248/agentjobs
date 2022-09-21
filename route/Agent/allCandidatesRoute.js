@@ -2,15 +2,16 @@ const path = require("path");
 const express = require("express");
 const router = express.Router();
 const userAuthController = require(path.join(__dirname, "..", "..", "controller", "userAuthController"));
-const jobpostcontroller = require(path.join(
+const allcandidatescontroller = require(path.join(
     __dirname,
     "..",
     "..",
     "controller",
     "Agent",
-    "jobPostController"
+    "allCandidatesController"
   ));
-  const {createJobPost,getAllJobpost}=require('../../controller/Agent/jobPostController')
   router.use(userAuthController.protect);
-  router.get("/getAvailableJobs",jobpostcontroller.getAvailableJobs);
+  router.post("/addCandidate",allcandidatescontroller.addCandidate);
+  router.get("/getregisteredcandidates",allcandidatescontroller.getRegisteredCandidates);
+
   module.exports = router;

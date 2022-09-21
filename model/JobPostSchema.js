@@ -2,28 +2,35 @@ const mongoose = require("mongoose");
 const moment = require("moment");
 const Schema = mongoose.Schema;
 const JobPostSchema = new Schema({
-  jobDesignation: {
+   jobDesignation: {
     type: String,
-    required: [true, "Please Provide Job Designation"],
-  },
+   // required: [true, "Please Provide Job Designation"],
+  }, 
+  companyLogo: String,
+  companyName: String,
+  jobType:String,
+  jobCode: String,
+  // requiredSkillSet: String,
   requiredExperience: {
-    type: String,
-    required: [true, "Please Provide Required Job Experience"],
+    fromExperience: Number,
+    toExperience: Number,
+    // required: [true, "Please Provide Required Job Experience"],
   },
   jobVacancy: {
     type: Number,
-    required: [ture, "Please Provide Job Vacancy"],
+    // required: [ture, "Please Provide Job Vacancy"],
   },
   postedOn: {
     type: Date,
-    default: moment(Date.now()).format("YYYY-MM-DD"),
+    default: Date.now,
   },
-  responsibilities: String,
+  
+  responsibility: String,
   keySkills: [{ type: String }],
   jobBenefits: [{ type: String }],
   salaryRange: {
-    fromSalary: String,
-    toSalary: String,
+    fromSalary: Number,
+    toSalary: Number,
   },
   jobLocation: {
     country: {
@@ -33,14 +40,15 @@ const JobPostSchema = new Schema({
     state: { type: String, required: [true, "Please Provide State"] },
     city: { type: String, required: [true, "Please Provide City"] },
   },
-  appliedCandidates: [{ type: mongoose.Schema.ObjectId, ref: "Candidate" }],
+  // appliedCandidates: [{ type: mongoose.Schema.ObjectId, ref: "Candidate" }],
   selectedCandidates: [{ type: mongoose.Schema.ObjectId, ref: "Candidate" }],
   createdById: {
     type: mongoose.Schema.ObjectId,
     ref: "JobPost",
     required: [true, "Please Provide Owner Id for this Job"],
   },
-});
+},
+);
 
 const JobPost = mongoose.model("JobPost", JobPostSchema);
 module.exports = JobPost;

@@ -17,6 +17,9 @@ const candidateVideoRouter=require(path.join(__dirname,"route","candidate","user
 const agentCompanyInfoRouter = require(path.join(__dirname, "route", "Agent", "agentCompanyInfoRoute"));
 const agentDocsUploadRouter = require(path.join(__dirname, "route", "Agent", "agentDocUploadRoute"));
 const agentJobsRouter=require(path.join(__dirname,"route","Agent","agentJobsRoute"));
+const allCandidatesRouter=require(path.join(__dirname,"route","Agent","allCandidatesRoute"));
+const agentProfileRouter=require(path.join(__dirname,"route","Agent","agentProfileRoute"));
+
 //Recruiter Routes
 const recCompanyInfoRouter=require(path.join(__dirname,"route","Recruiter","recCompanyInfoRoute"));
 const recDocsUploadRouter=require(path.join(__dirname,"route","Recruiter","recDocsUploadRoute"));
@@ -45,6 +48,11 @@ app.use("/eman-api/v1/agentCI/", agentCompanyInfoRouter);
 app.use("/eman-api/v1/agentDocsUpload/", agentDocsUploadRouter);
 //Agent Jobs routes
 app.use("/eman-api/v1/agentJobs/",agentJobsRouter);
+//All candidates routes for agent
+app.use("/eman-api/v1/allCandidates/",allCandidatesRouter);
+//AGENT PROFILE ROUTES
+app.use("/eman-api/v1/agentProfile/",agentProfileRouter);
+
 
 //RECRUITER ROUTES
 app.use("/eman-api/v1/recCI/",recCompanyInfoRouter);
