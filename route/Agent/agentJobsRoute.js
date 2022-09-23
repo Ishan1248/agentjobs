@@ -10,7 +10,7 @@ const jobpostcontroller = require(path.join(
     "Agent",
     "jobPostController"
   ));
-  const {createJobPost,getAllJobpost}=require('../../controller/Agent/jobPostController')
+  //const {createJobPost,getAllJobpost}=require('../../controller/Agent/jobPostController')
   router.use(userAuthController.protect);
   router.get("/getAvailableJobs",jobpostcontroller.getAvailableJobs);
   module.exports = router;

@@ -1,7 +1,6 @@
 const path = require("path");
 const catchAsync = require(path.join(__dirname, "..", "..", "utils", "catchAsync"));
 const AppErr = require(path.join(__dirname, "..", "..", "utils", "AppErr"));
-//const agent= require(path.join(__dirname, "..", "..", "model", "AgentSchema"));
 const checkArr = [
     "country",
     "state",

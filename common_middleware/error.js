@@ -1,4 +1,5 @@
 // const ErrorHandler = require("../utils/errorHandler");
+const path=require("path");
 const ErrorHandler = require(path.join(__dirname,"..","utils","errorHandler"));
 
 module.exports  = (err, req, res, next)=>{

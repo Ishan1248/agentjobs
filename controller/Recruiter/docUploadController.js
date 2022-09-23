@@ -1,7 +1,7 @@
 const path = require("path");
 const catchAsync = require(path.join(__dirname, "..", "..", "utils", "catchAsync"));
 const AppErr = require(path.join(__dirname, "..", "..", "utils", "AppErr"));
-const userAuthController = require(path.join(__dirname, "..", "..", "controller", "userAuthController"));
+const userAuthController=require(path.join(__dirname,"..","..","controller","userAuthController"));
 
 const checkArr= [
     "documentName",

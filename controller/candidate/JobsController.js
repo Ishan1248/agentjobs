@@ -1,5 +1,4 @@
 const path = require("path");
-//const Candidate = require("../../model/CandidateSchema");
 const Candidate = require(path.join(__dirname, "..", "..", "model", "CandidateSchema"));
 const catchAsync = require(path.join(__dirname, "..", "..", "utils", "catchAsync"));
 const AppErr = require(path.join(__dirname, "..", "..", "utils", "AppErr"));

@@ -1,5 +1,6 @@
 // const ErrorHandler = require("../utils/errorHandler");
 // const catchAsyncError = require("./catchAsyncError");
+const path=require("path");
 const ErrorHandler = require(path.join(__dirname,"..","utils","errorHandler"));
 const catchAsyncError = require(path.join(__dirname,"..","common_middleware","catchAsyncError"));
 const jwt = require ('jsonwebtoken')

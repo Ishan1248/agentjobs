@@ -1,11 +1,5 @@
-// const ErrorHandler = require("../../utils/errorHandler");
-// const catchAsyncErrors = require("../../common_middleware/catchAsyncError");
-// const ApiFeatures = require("../../utils/apiFeatures");
-// const AppErr=require('../../utils/AppErr');
-// const agentschema=require('../../model/AgentSchema');
-const ErrorHandler = require(path.join(__dirname,"..","..","utils","errorHandler"));
+const path=require('path');
 const catchAsyncErrors = require(path.join(__dirname,"..","..","common_middleware","catchAsyncError"));
-const ApiFeatures = require(path.join(__dirname,"..","..","utils","apiFeatures"));
 const AppErr=require(path.join(__dirname,"..","..","utils","AppErr"));
 const agentschema=require(path.join(__dirname,"..","..","model","AgentSchema"));
 

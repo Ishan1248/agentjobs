@@ -1,18 +1,14 @@
-// const catchAsyncErrors = require("../../common_middleware/catchAsyncError");
-//  const ApiFeatures = require("../../utils/apiFeatures");
-// // const jobpost=require('../../model/JobPostSchema');
-// // const AppErr=require('../../utils/AppErr');
-// const candidates=require('../../model/CandidateSchema');
-// const agentschema=require('../../model/AgentSchema');
-const catchAsyncErrors = require(path.join(__dirname,"..","..","common_middleware","catchAsyncError"));
-const apiFeatures = require(path.join(__dirname,"..","..","utils","apiFeatures"));
+const path = require("path");
+const catchAsync = require(path.join(__dirname, "..","..", "utils", "catchAsync"));
+//const catchAsyncErrors = require(path.join(__dirname,"..","..","common_middleware","catchAsyncError"));
+//const apiFeatures = require(path.join(__dirname,"..","..","utils","apiFeatures"));
 const candidates=require(path.join(__dirname,"..","..","model","CandidateSchema"));
 const agentschema=require(path.join(__dirname,"..","..","model","AgentSchema"));
 const jobpost=require(path.join(__dirname,"..","..","model","JobPostSchema"));
 const AppErr=require(path.join(__dirname,"..","..","utils","AppErr"));
 
 //ADD CANDIDATE
-exports.addCandidate = catchAsyncErrors(async (req, res, next) => {
+exports.addCandidate = catchAsync(async (req, res, next) => {
     const user=req.user;
     if(user.role==="Agent" || user.role==="agent"){
         const agent=await agentschema.findById(user._id);
@@ -35,7 +31,7 @@ exports.addCandidate = catchAsyncErrors(async (req, res, next) => {
 
 
 //GET REGISTERED CANDIDATES
-exports.getRegisteredCandidates = catchAsyncErrors(async (req, res, next) => {
+exports.getRegisteredCandidates = catchAsync(async (req, res, next) => {
     //const agentId=req.user._id;
     const user=req.user;
     if(user.role==="Agent" || user.role==="agent"){

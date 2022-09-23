@@ -1,15 +1,11 @@
-//const ErrorHandler = require("../../utils/errorHandler");
-// const catchAsyncErrors = require("../../common_middleware/catchAsyncError");
-// const ApiFeatures = require("../../utils/apiFeatures");
-// const jobpost=require('../../model/JobPostSchema');
-// const AppErr=require('../../utils/AppErr');
-const ErrorHandler = require(path.join(__dirname,"..","..","utils","errorHandler"));
-const catchAsyncErrors = require(path.join(__dirname,"..","..","common_middleware","catchAsyncError"));
-const ApiFeatures = require(path.join(__dirname,"..","..","utils","apiFeatures"));
+const path = require("path");
+const catchAsync = require(path.join(__dirname, "..","..", "utils", "catchAsync"));
+const ApiFeatures=require(path.join(__dirname,"..","..","utils","apiFeatures"));
 const jobpost=require(path.join(__dirname,"..","..","model","JobPostSchema"));
 const AppErr=require(path.join(__dirname,"..","..","utils","AppErr"));
+//const errorHandler = require(path.join(__dirname,"..","..","common_middleware","errorHandler"));
 
-exports.getAvailableJobs = catchAsyncErrors(async (req, res, next) => {
+exports.getAvailableJobs = catchAsync(async (req, res, next) => {
   const user=req.user;
   if(user.role==="Agent" || user.role==="agent"){
    const resultPerPage=8;
